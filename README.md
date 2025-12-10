@@ -2,7 +2,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/alpcpa_website.git
+   git clone https://github.com/polu4/alpcpa_website.git
    cd alpcpa_website
    ```
 
