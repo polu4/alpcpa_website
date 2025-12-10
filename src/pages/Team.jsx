@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Linkedin, Mail } from 'lucide-react';
+import { X, Linkedin, Mail, Phone } from 'lucide-react';
 import headshot from '../assets/aaron.png';
 import sampleHeadshot from '../assets/sampleHeadshot.png';
 import VideoBackground from '../components/VideoBackground';
 import bg1 from '../assets/backgrounds/bg1.mp4';
+import Luke from '../assets/portraits/Luke.png';
+import Bob from '../assets/portraits/Bob-Poley.png';
+import Brenda from '../assets/portraits/Brenda.jpg';
 
 const Team = () => {
     const [selectedMember, setSelectedMember] = useState(null);
@@ -12,24 +15,24 @@ const Team = () => {
     const teamMembers = [
         {
             id: 1,
-            name: "Sarah Jenkins",
-            role: "Senior Auditor",
-            bio: "Sarah brings over 10 years of auditing experience, specializing in joint interest audits for the energy sector.",
-            image: sampleHeadshot
+            name: "Luke Poley",
+            role: "Accountant and Director of Technology",
+            bio: "On the team, Luke maintains the website and works on optimizing the databases to automate repetitive tasks, build custom functions, and create user interfaces. On Friday nights, he’s usually scripting or discovering the newest CLI trick that saves him five milliseconds on his Linux daily driver. Occasionally, he’ll read philosophy (for boredom), climb a 14er, play golf for the aura, come up with a cool new board game idea, or play sports for the exercise.",
+            image: Luke
         },
         {
             id: 2,
-            name: "Glizzy Hands",
-            role: "Tax Specialist",
-            bio: "Glizzy is an expert in corporate taxation and strategic planning, helping businesses navigate complex tax landscapes.",
-            image: sampleHeadshot
+            name: "Bob Poley",
+            role: "Senior Consultant",
+            bio: "Bob Poley provides our team the insight and depth of experience our clients depend on to move forward consistently despite the distraction of day-to-day problems. A former Examiner of registration statements and annual reports on the staff of the SEC, his wide breadth of experience includes biotechnology, telecommunications and oil and gas in both the boom years and the chaos of low and falling prices. He has farmed raspberries, scaled at least a dozen Colorado 14ers and 13ers, and when those hobbies aren’t keeping him busy, enjoys spending time with his wife, children and 14 grandchildren. He has worked with Aaron for over seven years. ",
+            image: Bob
         },
         {
             id: 3,
-            name: "Lukas Timothy",
-            role: "Financial Analyst",
-            bio: "Lukas specializes in financial reporting and data analysis, delivering actionable insights for our clients.",
-            image: sampleHeadshot
+            name: "Brenda Carter",
+            role: "Accountant",
+            bio: " Brenda Carter has the detail focus and elbow grease to get the job done for our clients. She brings extensive accounting experience in the oil and gas, assisted living and accounting services industries. In her free time, she enjoys spending time with her family, enjoying nature and volunteering at her church. She has worked with Aaron for over Five years.",
+            image: Brenda
         }
     ];
 
@@ -48,17 +51,17 @@ const Team = () => {
                             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Aaron L. Poley</h1>
                             <p className="text-accent text-xl font-medium mb-6">CPA & Founder</p>
                             <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8">
-                                With a focus on litigation support, joint interest auditing, and financial reporting, Aaron leads the firm with a commitment to absolute professionalism and integrity. His expertise has helped clients recover millions in claims and navigate complex financial challenges.
+                                Aaron L. Poley, CPA, brings extensive expertise in litigation support, joint interest auditing, and financial reporting to serve clients across diverse industries. With an unwavering commitment to professional excellence and ethical standards, he has successfully guided organizations through complex financial matters, helping clients recover millions in claims while ensuring regulatory compliance and financial transparency. His strategic approach combines technical proficiency with a deep understanding of business operations to deliver comprehensive solutions tailored to each client's unique needs.
                             </p>
                             <div className="flex space-x-4">
-                                <button className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors">
+                                <a href="https://www.linkedin.com/in/aaronpoley/" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors">
                                     <Linkedin className="w-6 h-6" />
                                     <span>LinkedIn</span>
-                                </button>
-                                <button className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors">
-                                    <Mail className="w-6 h-6" />
-                                    <span>Email</span>
-                                </button>
+                                </a>
+                                <a href="tel:8054195239" className="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-accent transition-colors">
+                                    <Phone className="w-6 h-6" />
+                                    <span>805-419-5239</span>
+                                </a>
                             </div>
                         </div>
                     </div>

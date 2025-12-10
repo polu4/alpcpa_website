@@ -52,13 +52,15 @@ const InfoCards = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700 group"
+                            className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 border border-gray-100 dark:border-gray-700 group"
                         >
-                            <div className="mb-6 p-4 bg-primary/5 dark:bg-primary/20 rounded-full w-fit group-hover:bg-primary/10 dark:group-hover:bg-primary/30 transition-colors">
-                                {card.icon}
+                            <div className="mb-6 p-4 bg-primary/5 dark:bg-primary/20 rounded-full w-fit group-hover:bg-primary/10 dark:group-hover:bg-primary/30 transition-all duration-300">
+                                <div className="group-hover:drop-shadow-[0_0_8px_rgba(0,184,245,0.8)] group-hover:scale-110 transition-all duration-300">
+                                    {card.icon}
+                                </div>
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{card.title}</h3>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:drop-shadow-[0_0_6px_rgba(0,184,245,0.6)] transition-all duration-300">{card.title}</h3>
+                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed group-hover:drop-shadow-[0_0_4px_rgba(0,184,245,0.4)] transition-all duration-300">
                                 {card.description}
                             </p>
                         </motion.div>

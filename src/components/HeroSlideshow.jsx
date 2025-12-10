@@ -31,8 +31,6 @@ const HeroSlideshow = () => {
                     >
                         <div className="relative overflow-hidden rounded-lg shadow-2xl">
                             <img src={headshot} alt="Aaron L Poley" className="w-full h-auto object-cover" />
-                            {/* Blur line / Gradient at bottom */}
-                            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-primary/90 to-transparent backdrop-blur-[2px]"></div>
                         </div>
                     </motion.div>
                     <motion.div
@@ -142,9 +140,9 @@ const HeroSlideshow = () => {
                         </p>
                         <Link to="/contact">
                             <motion.button
-                                whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 184, 245, 1)" }}
+                                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0, 184, 245, 0.5)" }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-transparent border-2 border-white text-white font-bold py-4 px-10 rounded-full transition-all shadow-lg uppercase tracking-wider text-sm hover:border-accent"
+                                className="bg-transparent border-2 border-accent text-white font-bold py-3 px-8 hover:bg-accent transition-all uppercase tracking-widest rounded-sm"
                             >
                                 Talk to Us
                             </motion.button>

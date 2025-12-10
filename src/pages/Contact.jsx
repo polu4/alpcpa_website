@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Phone, Mail } from 'lucide-react';
+import { Send, MapPin, Phone, Mail, AlertCircle } from 'lucide-react';
 import VideoBackground from '../components/VideoBackground';
 import bg2 from '../assets/backgrounds/bg2.mp4';
+import { validateForm, LIMITS } from '../utils/sanitization';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -11,15 +12,62 @@ const Contact = () => {
         message: ''
     });
 
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+
+    const [touched, setTouched] = useState({
+        name: false,
+        email: false,
+        message: false
+    });
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Form submitted:', formData);
+
+        // Validate and sanitize all inputs
+        const validation = validateForm(formData);
+
+        if (!validation.isValid) {
+            setErrors(validation.errors);
+            setTouched({ name: true, email: true, message: true });
+            return;
+        }
+
+        // Use sanitized data for submission
+        console.log('Form submitted with sanitized data:', validation.sanitized);
+
+        // TODO: Send sanitized data to backend service
+        // Example: await sendEmail(validation.sanitized);
+
         alert('Message sent! (This is a demo)');
+
+        // Reset form
         setFormData({ name: '', email: '', message: '' });
+        setErrors({ name: '', email: '', message: '' });
+        setTouched({ name: false, email: false, message: false });
     };
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        // Update form data
+        setFormData({ ...formData, [name]: value });
+
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors({ ...errors, [name]: '' });
+        }
+    };
+
+    const handleBlur = (field) => {
+        setTouched({ ...touched, [field]: true });
+
+        // Validate on blur
+        const validation = validateForm(formData);
+        setErrors(validation.errors);
     };
 
     return (
@@ -54,22 +102,13 @@ const Contact = () => {
                                 </div>
                             </div>
                             <div className="flex items-start space-x-4">
-                                <div className="bg-primary/5 dark:bg-primary/20 p-3 rounded-full">
-                                    <Mail className="w-6 h-6 text-accent" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-gray-900 dark:text-white">Email</h3>
-                                    <p className="text-gray-600 dark:text-gray-300">aaron@aaronpoleycpa.com</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start space-x-4">
-                                <div className="bg-primary/5 dark:bg-primary/20 p-3 rounded-full">
+                                <a href="tel:8057957458" className="bg-primary/5 dark:bg-primary/20 p-3 rounded-full">
                                     <Phone className="w-6 h-6 text-accent" />
-                                </div>
-                                <div>
+                                </a>
+                                <a href="tel:8057957458">
                                     <h3 className="font-bold text-gray-900 dark:text-white">Phone</h3>
-                                    <p className="text-gray-600 dark:text-gray-300">(555) 123-4567</p>
-                                </div>
+                                    <p className="text-gray-600 dark:text-gray-300">(805) 795-7458</p>
+                                </a>
                             </div>
                         </div>
                     </motion.div>
@@ -81,45 +120,96 @@ const Contact = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg"
                     >
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                             <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                    Name <span className="text-red-500">*</span>
+                                </label>
                                 <input
                                     type="text"
                                     id="name"
                                     name="name"
                                     value={formData.name}
                                     onChange={handleChange}
+                                    onBlur={() => handleBlur('name')}
                                     required
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
+                                    maxLength={LIMITS.NAME}
+                                    className={`w-full px-4 py-3 rounded-lg border ${touched.name && errors.name
+                                            ? 'border-red-500 focus:ring-red-500'
+                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
                                     placeholder="Your Name"
+                                    aria-invalid={touched.name && errors.name ? 'true' : 'false'}
+                                    aria-describedby={touched.name && errors.name ? 'name-error' : undefined}
                                 />
+                                {touched.name && errors.name && (
+                                    <div id="name-error" className="mt-1 flex items-center text-sm text-red-600 dark:text-red-400">
+                                        <AlertCircle className="w-4 h-4 mr-1" />
+                                        {errors.name}
+                                    </div>
+                                )}
+                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    {formData.name.length}/{LIMITS.NAME} characters
+                                </p>
                             </div>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                    Email <span className="text-red-500">*</span>
+                                </label>
                                 <input
                                     type="email"
                                     id="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
+                                    onBlur={() => handleBlur('email')}
                                     required
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
+                                    maxLength={LIMITS.EMAIL}
+                                    className={`w-full px-4 py-3 rounded-lg border ${touched.email && errors.email
+                                            ? 'border-red-500 focus:ring-red-500'
+                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
                                     placeholder="your@email.com"
+                                    aria-invalid={touched.email && errors.email ? 'true' : 'false'}
+                                    aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
                                 />
+                                {touched.email && errors.email && (
+                                    <div id="email-error" className="mt-1 flex items-center text-sm text-red-600 dark:text-red-400">
+                                        <AlertCircle className="w-4 h-4 mr-1" />
+                                        {errors.email}
+                                    </div>
+                                )}
                             </div>
                             <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Message</label>
+                                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                    Message <span className="text-red-500">*</span>
+                                </label>
                                 <textarea
                                     id="message"
                                     name="message"
                                     value={formData.message}
                                     onChange={handleChange}
+                                    onBlur={() => handleBlur('message')}
                                     required
                                     rows="4"
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all resize-none"
+                                    maxLength={LIMITS.MESSAGE}
+                                    className={`w-full px-4 py-3 rounded-lg border ${touched.message && errors.message
+                                            ? 'border-red-500 focus:ring-red-500'
+                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all resize-none`}
                                     placeholder="How can we help you?"
+                                    aria-invalid={touched.message && errors.message ? 'true' : 'false'}
+                                    aria-describedby={touched.message && errors.message ? 'message-error' : undefined}
                                 ></textarea>
+                                {touched.message && errors.message && (
+                                    <div id="message-error" className="mt-1 flex items-center text-sm text-red-600 dark:text-red-400">
+                                        <AlertCircle className="w-4 h-4 mr-1" />
+                                        {errors.message}
+                                    </div>
+                                )}
+                                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                                    {formData.message.length}/{LIMITS.MESSAGE} characters
+                                </p>
                             </div>
                             <button
                                 type="submit"
