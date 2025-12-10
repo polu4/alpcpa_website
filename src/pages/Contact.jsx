@@ -135,8 +135,8 @@ const Contact = () => {
                                     required
                                     maxLength={LIMITS.NAME}
                                     className={`w-full px-4 py-3 rounded-lg border ${touched.name && errors.name
-                                            ? 'border-red-500 focus:ring-red-500'
-                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        ? 'border-red-500 focus:ring-red-500'
+                                        : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
                                         } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
                                     placeholder="Your Name"
                                     aria-invalid={touched.name && errors.name ? 'true' : 'false'}
@@ -166,8 +166,8 @@ const Contact = () => {
                                     required
                                     maxLength={LIMITS.EMAIL}
                                     className={`w-full px-4 py-3 rounded-lg border ${touched.email && errors.email
-                                            ? 'border-red-500 focus:ring-red-500'
-                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        ? 'border-red-500 focus:ring-red-500'
+                                        : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
                                         } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all`}
                                     placeholder="your@email.com"
                                     aria-invalid={touched.email && errors.email ? 'true' : 'false'}
@@ -194,8 +194,8 @@ const Contact = () => {
                                     rows="4"
                                     maxLength={LIMITS.MESSAGE}
                                     className={`w-full px-4 py-3 rounded-lg border ${touched.message && errors.message
-                                            ? 'border-red-500 focus:ring-red-500'
-                                            : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
+                                        ? 'border-red-500 focus:ring-red-500'
+                                        : 'border-gray-300 dark:border-gray-600 focus:ring-accent'
                                         } dark:bg-gray-700 dark:text-white focus:ring-2 focus:border-transparent outline-none transition-all resize-none`}
                                     placeholder="How can we help you?"
                                     aria-invalid={touched.message && errors.message ? 'true' : 'false'}
