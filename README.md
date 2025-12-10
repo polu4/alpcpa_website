@@ -1,4 +1,4 @@
-## 🔧 Installation
+## Installation
 
 1. **Clone the repository**
    ```bash
@@ -11,7 +11,7 @@
    npm install
    ```
 
-## 🏃 Running the Development Server
+## Running the Development Server
 
 Start the development server with hot module replacement:
 
