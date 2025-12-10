@@ -11,7 +11,7 @@
    npm install
    ```
 
-## Running the Development Server
+## Running the Server
 
 Start the development server with hot module replacement:
 
