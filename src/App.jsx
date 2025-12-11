@@ -34,15 +34,12 @@ function App() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div>
-                                <h3 className="text-xl font-bold mb-4">Aaron L Poley CPA</h3>
-                                <p className="text-gray-400">
-                                    Absolute professionalism, integrity, and accountability.
-                                </p>
+                                <h3 className="text-xl font-bold mb-4">Aaron L. Poley, CPA</h3>
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold mb-4">Contact</h3>
-                                <p className="text-gray-400">Erie, Colorado</p>
-                                <p className="text-gray-400">contact@aaronpoleycpa.com</p>
+                                <p className="text-gray-400">(805) 795-7458</p>
+                                <p className="text-gray-400">aaron@aaronpoleycpa.com</p>
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold mb-4">Quick Links</h3>
